@@ -41,7 +41,9 @@ int main()
 {
 	// (466551)
 	std::deque<std::vector<char>> words;
+	//used  <std::vector<char>> because , it's much easier to go with it
 	std::vector<std::pair<char, int>> wordsIndex;
+	// It
 	fstream openFile("words.txt");
 	std::string word = "";
 	if (openFile)
@@ -70,8 +72,9 @@ int main()
 
 	std::string input;
 	std::cout << "Enter word to find ------------" << std::endl;
-	// std::cin >> input;
-	input = "helxo";
+	std::cin >> input;
+	// input = "pn";  // Written Just for testing
+
 	std::vector<char> inputVector(input.length());
 	std::copy(input.begin(), input.end(), inputVector.begin());
 	std::deque<vector<char>>::iterator foundIterator = std::find(words.begin(), words.end(), inputVector);
@@ -81,6 +84,7 @@ int main()
 		//l
 		std::cout << "No matching words found " << std::endl;
 		std::cout << "Suggestions for you are \n";
+
 		char currentChar = inputVector.at(0);
 		std::vector<std::pair<char, int>>::iterator letterIterator = find_if(wordsIndex.begin(), wordsIndex.end(), [&currentChar](const std::pair<char, int> &element)
 																			 { return compare(element.first, currentChar); });
@@ -89,12 +93,8 @@ int main()
 		{
 			int currentLetterIndex = (*letterIterator).second;
 			int nextLetterIndex = (*(letterIterator + 1)).second;
-			std::deque<std::vector<char>> suggestions(nextLetterIndex - currentLetterIndex);
-			// std::cout << "The size is " << suggestions.size();
-			std::deque<std::vector<char>>::iterator currentIterator = words.begin() + currentLetterIndex,
-													nextIterator = words.begin() + nextLetterIndex;
-			std::copy(currentIterator, nextIterator, suggestions.begin());
-
+			std::deque<std::vector<char>> suggestions(words.size());
+			std::copy(words.begin(), words.end(), suggestions.begin());
 			suggestions.erase(std::remove_if(
 								  suggestions.begin(), suggestions.end(),
 								  [&](const std::vector<char> elem)
@@ -135,6 +135,10 @@ int main()
 					}
 				}
 			}
+			if (suggestions.size() > 5)
+			{
+				suggestions.erase(suggestions.begin() + 5, suggestions.end());
+			}
 			displayVectorDeque(suggestions);
 		}
 	}
@@ -148,3 +152,5 @@ int main()
 
 	return 0;
 }
+
+// speed changed from (5-6) to (6-8)
