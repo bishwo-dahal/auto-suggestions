@@ -10002,3 +10002,4 @@ let words = [
 ];
 
 module.exports = words;
+// Used array because there is no support for file with plain JavaScript.
