@@ -78,7 +78,6 @@ int main()
 		std::deque<std::vector<char>> suggestions, previousSuggestion;
 		// words.size() is necessary because it won't copy if not given
 		suggestions = words;
-		// can just use equal operator;
 		suggestions.erase(std::remove_if(
 							  suggestions.begin(), suggestions.end(),
 							  [&](const std::vector<char> elem)
@@ -86,6 +85,7 @@ int main()
 								  return elem.size() != inputVector.size(); // put your condition here
 							  }),
 						  suggestions.end());
+		// removes elements whose size doesnot match with input text
 
 		for (int cc = 1; cc < inputVector.size(); cc++)
 		{
