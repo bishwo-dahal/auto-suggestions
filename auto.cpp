@@ -144,7 +144,7 @@ int main()
 	}
 	else
 	{
-		std::cout << "Found your word at the dictionary\n";
+		std::cout << "Found your words \n";
 		std::cout << "Here are the list of words near this one " << std::endl;
 		displayCharVector(*(foundIterator - 1));
 		displayCharVector(*(foundIterator + 1));
